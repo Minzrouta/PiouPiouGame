@@ -28,6 +28,7 @@ public class PlayerMovements : MonoBehaviour
         Move();
         Jump();
         EnergyRegen();
+        MoveInAir();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
@@ -80,7 +81,42 @@ public class PlayerMovements : MonoBehaviour
 
     private void MoveInAir()
     {
+        if (_isGrounded) return;
         
+        var rotation = transform.rotation;
+        Vector3 move = Vector3.zero;
+        bool[] isMoving = new bool[4] {false, false, false, false};
+        if (Input.GetKey(KeyCode.W))
+        {
+            move += Vector3.forward;
+            isMoving[0] = true;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            move += Vector3.back;
+            isMoving[1] = true;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            move += Vector3.left;
+            isMoving[2] = true;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            move += Vector3.right;
+            isMoving[3] = true;
+        }
+        
+        move = move.normalized;
+        
+        
+        if (isMoving != new bool[4]{false, false, false, false})
+        {
+            _rb.AddForce(new Vector3(
+                (rotation * move * speed).x,
+                0,
+                (rotation * move * speed).z), ForceMode.Impulse); 
+        }
     }
 
     private void Jump()
