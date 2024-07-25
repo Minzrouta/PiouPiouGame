@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -23,11 +24,9 @@ public class PlayerMovements : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
     
-    void Update()
+    void FixedUpdate()
     {
-        
-        if (_isGrounded) {Move();}
-        Jump();
+        if (_isGrounded) {Move(1);}
         EnergyRegen();
         MoveInAir();
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -35,10 +34,14 @@ public class PlayerMovements : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
-    
 
-    
-    private void Move()
+    private void Update()
+    {
+        Jump();
+    }
+
+
+    private void Move(float power)
     {
         var rotation = transform.rotation;
         Vector3 move = Vector3.zero;
@@ -72,9 +75,9 @@ public class PlayerMovements : MonoBehaviour
         if (isMoving != new bool[4]{false, false, false, false})
         {
             _rb.linearVelocity = new Vector3(
-                (rotation * move * speed).x,
+                (rotation * move * speed).x*power,
                 currentVelocity.y,
-                (rotation * move * speed).z);
+                (rotation * move * speed).z*power);
         }
     }
 
@@ -114,7 +117,7 @@ public class PlayerMovements : MonoBehaviour
             _rb.AddForce(new Vector3(
                 (rotation * move * speed).x,
                 0,
-                (rotation * move * speed).z), ForceMode.Impulse); 
+                (rotation * move * speed).z)*3, ForceMode.Impulse);
         }
     }
 
@@ -130,7 +133,7 @@ public class PlayerMovements : MonoBehaviour
             lVelocity = new Vector3(lVelocity.x, 0, lVelocity.z);
             _rb.linearVelocity = lVelocity;
             _rb.AddForce(Vector3.up * (jumpForce + jumpForce * energyCurrent/energyMax), ForceMode.Impulse);
-            Move();
+            Move(0.5f);
             
             _isGrounded = false;
         }

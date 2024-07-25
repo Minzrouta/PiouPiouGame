@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
     private Transform _head;
     [SerializeField]private float mouseSensitivity = 50f;
