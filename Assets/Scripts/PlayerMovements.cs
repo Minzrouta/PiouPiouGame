@@ -25,7 +25,8 @@ public class PlayerMovements : MonoBehaviour
     
     void Update()
     {
-        Move();
+        
+        if (_isGrounded) {Move();}
         Jump();
         EnergyRegen();
         MoveInAir();
@@ -39,8 +40,6 @@ public class PlayerMovements : MonoBehaviour
     
     private void Move()
     {
-        if (!_isGrounded) return;
-        
         var rotation = transform.rotation;
         Vector3 move = Vector3.zero;
         Vector3 currentVelocity = _rb.linearVelocity;
@@ -126,8 +125,12 @@ public class PlayerMovements : MonoBehaviour
             if (energyCurrent < jumpCost) { energyCurrent = 0; }
             else { energyCurrent -= jumpCost; }
             _playerUI.UpdateEnergyBar(energyCurrent, energyMax);
-            
+
+            var lVelocity = _rb.linearVelocity;
+            lVelocity = new Vector3(lVelocity.x, 0, lVelocity.z);
+            _rb.linearVelocity = lVelocity;
             _rb.AddForce(Vector3.up * (jumpForce + jumpForce * energyCurrent/energyMax), ForceMode.Impulse);
+            Move();
             
             _isGrounded = false;
         }
