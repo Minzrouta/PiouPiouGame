@@ -1,8 +1,8 @@
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMovements : MonoBehaviour
 {
-    
     private Rigidbody _rb;
     public float speed = 5;
     public float jumpForce = 5;
@@ -65,9 +65,12 @@ public class PlayerMovements : MonoBehaviour
             isMoving[3] = true;
         }
         
+        
+        move = move.normalized;
+        
+        
         if (isMoving != new bool[4]{false, false, false, false})
         {
-
             _rb.linearVelocity = new Vector3(
                 (rotation * move * speed).x,
                 currentVelocity.y,
