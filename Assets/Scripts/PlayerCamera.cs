@@ -26,7 +26,7 @@ public class PlayerCamera : MonoBehaviour
             mouseY = 0;
         }
 
-        _head.transform.Rotate(Vector3.left * (mouseY * 3));
-        transform.Rotate(Vector3.up * (mouseX * 3));
+        _head.transform.Rotate(Vector3.left * mouseY);
+        transform.Rotate(Vector3.up * mouseX);
     }
 }

@@ -46,33 +46,33 @@ public class PlayerMovements : MonoBehaviour
         var rotation = transform.rotation;
         Vector3 move = Vector3.zero;
         Vector3 currentVelocity = _rb.linearVelocity;
-        bool[] isMoving = new bool[4] {false, false, false, false};
+        bool isMoving = false;
         if (Input.GetKey(KeyCode.W))
         {
             move += Vector3.forward;
-            isMoving[0] = true;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.S))
         {
             move += Vector3.back;
-            isMoving[1] = true;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
             move += Vector3.left;
-            isMoving[2] = true;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.D))
         {
             move += Vector3.right;
-            isMoving[3] = true;
+            isMoving = true;
         }
         
         
         move = move.normalized;
         
         
-        if (isMoving != new bool[4]{false, false, false, false})
+        if (isMoving)
         {
             _rb.linearVelocity = new Vector3(
                 (rotation * move * speed).x*power,
