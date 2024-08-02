@@ -13,6 +13,13 @@ public class PlayerMovements : MonoBehaviour
     public float jumpCost = 10;
     private PlayerUI _playerUI;
     private bool _isGrounded;
+    
+    public KeyCode forward = KeyCode.W;
+    public KeyCode backward = KeyCode.S;
+    public KeyCode left = KeyCode.A;
+    public KeyCode right = KeyCode.D;
+    public KeyCode jump = KeyCode.Space;
+    public KeyCode sprint = KeyCode.LeftShift;
 
 
 
@@ -29,6 +36,7 @@ public class PlayerMovements : MonoBehaviour
         if (_isGrounded) {Move(1);}
         else {MoveInAir();}
         EnergyRegen();
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
@@ -47,22 +55,22 @@ public class PlayerMovements : MonoBehaviour
         Vector3 move = Vector3.zero;
         Vector3 currentVelocity = _rb.linearVelocity;
         bool isMoving = false;
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(forward))
         {
             move += Vector3.forward;
             isMoving = true;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(backward))
         {
             move += Vector3.back;
             isMoving = true;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(left))
         {
             move += Vector3.left;
             isMoving = true;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(right))
         {
             move += Vector3.right;
             isMoving = true;
@@ -83,19 +91,19 @@ public class PlayerMovements : MonoBehaviour
     {
         var rotation = transform.rotation;
         Vector3 move = Vector3.zero;
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(forward))
         {
             move += Vector3.forward;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(backward))
         {
             move += Vector3.back;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(left))
         {
             move += Vector3.left;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(right))
         {
             move += Vector3.right;
         }
@@ -107,9 +115,10 @@ public class PlayerMovements : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && energyCurrent > 1)
+        if (Input.GetKeyDown(jump) && (energyCurrent > 1 || _isGrounded))
         {
-            if (energyCurrent < jumpCost) { energyCurrent = 0; }
+            if (_isGrounded) { }
+            else if (energyCurrent < jumpCost) { energyCurrent = 0; }
             else { energyCurrent -= jumpCost; }
             _playerUI.UpdateEnergyBar(energyCurrent, energyMax);
 

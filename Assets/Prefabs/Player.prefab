@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5763267057827626836}
   - component: {fileID: 3282917702884823026}
   - component: {fileID: 4990380558167514958}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2658303528526469396}
   - component: {fileID: 2297295984671548524}
   - component: {fileID: 4873430968584741564}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,8 @@ GameObject:
   - component: {fileID: -5548891658077752380}
   - component: {fileID: 173482569531258887}
   - component: {fileID: 6459873553004761032}
-  m_Layer: 0
+  - component: {fileID: 889982905664512043}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,6 +378,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e94be42d7983c6499a4c62065d3f84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: 100
+  playerMaxHealth: 100
+  playerEnergy: 100
+  playerMaxEnergy: 100
+  playerEnergyRegen: 1
 --- !u!114 &173482569531258887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +401,12 @@ MonoBehaviour:
   energyRegen: 1
   energyMax: 100
   jumpCost: 10
+  forward: 119
+  backward: 115
+  left: 97
+  right: 100
+  jump: 32
+  sprint: 304
 --- !u!114 &6459873553004761032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,6 +422,33 @@ MonoBehaviour:
   mouseSensitivity: 6
   bottomCameraAngle: 0.5
   topCameraAngle: -0.5
+--- !u!114 &889982905664512043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2561733626845284660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9979e6b40738c334ea017c6aab8b87d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  explosionRange: 0
+  explosiveDamage: 5
+  range: 100
+  fireRate: 1
+  reloadTime: 1
+  projectileSpeed: 30
+  maxAmmo: 9999
+  currentAmmo: 0
+  isReloading: 0
+  isMelee: 0
+  projectilePrefab: {fileID: 4607789003907542329, guid: 7fb00bbce97417b4b939ef70a4dc6598, type: 3}
+  fireButton: 323
+  reloadButton: 114
+  meleeButton: 118
 --- !u!1 &4332238228329712601
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +461,7 @@ GameObject:
   - component: {fileID: 4235369542713057706}
   - component: {fileID: 5518176093744171301}
   - component: {fileID: 3537690990286366286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -437,13 +476,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4332238228329712601}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09579947, y: -0, z: -0, w: 0.99540067}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1111112, y: 1.1111112, z: 1.1111112}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5141238531903642284}
-  m_LocalEulerAnglesHint: {x: 10.995, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &4235369542713057706
 Camera:
   m_ObjectHideFlags: 0
@@ -558,7 +597,7 @@ GameObject:
   - component: {fileID: 8318627589946478434}
   - component: {fileID: 7324261283072331079}
   - component: {fileID: 3296292949195108147}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,7 +683,7 @@ GameObject:
   - component: {fileID: 7163165593500982408}
   - component: {fileID: 2604271175772448539}
   - component: {fileID: 4364886339641500345}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eye2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,7 +769,7 @@ GameObject:
   - component: {fileID: 7044529580660715590}
   - component: {fileID: 4927846016379081114}
   - component: {fileID: 3076108215183428687}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wing1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +855,7 @@ GameObject:
   - component: {fileID: 4282272141234511038}
   - component: {fileID: 4757481425768951111}
   - component: {fileID: 6791165066156857264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +941,7 @@ GameObject:
   - component: {fileID: 8994296846860377691}
   - component: {fileID: 7686384249065983252}
   - component: {fileID: 8739620311086375594}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bec
   m_TagString: Untagged
   m_Icon: {fileID: 0}

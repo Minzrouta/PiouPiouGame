@@ -25,6 +25,8 @@ public class PlayerUI : MonoBehaviour
         _energyBar.localScale = new Vector3((newEnergy / maxEnergy) * _barScaleX, _barScaleY, 1);
     }
     
+    
+    
     private void HostGame()
     {
         NetworkManager.Singleton.StartHost();
